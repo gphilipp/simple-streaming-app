@@ -6,7 +6,6 @@ WORKDIR /home/gradle/app
 
 # Copy the build files first to make use of Docker's caching and speed up builds when your source changes
 COPY *.gradle ./
-COPY gradle ./gradle
 COPY client.properties.template ./
 COPY deploy/entrypoint.sh ./
 
