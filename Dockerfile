@@ -19,11 +19,11 @@ RUN gradle clean build -x test
 FROM openjdk:11-jre-slim
 
 # Copy the built application JAR from the build image
-COPY --from=build /home/gradle/app/build/libs/simple-streaming-app-all.jar /app/producer.jar
+COPY --from=build /home/gradle/app/build/libs/simple-streaming-app-all.jar /app/simple-streaming-app-all.jar
 COPY --from=build /home/gradle/app/client.properties ./
 
 # healthcheck port at /health
 EXPOSE 8000
 
 # Command to run the application
-CMD ["java", "-jar", "/app/producer.jar"]
+CMD ["java", "-jar", "/app/simple-streaming-app-all.jar"]
