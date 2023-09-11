@@ -71,7 +71,6 @@ public class SimpleStreamingApp {
                         exception.printStackTrace(System.err);
                     }
                 });
-                System.out.println("Avro record sent!");
             }
         } catch (Exception e) {
             e.printStackTrace();
