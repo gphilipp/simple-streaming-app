@@ -61,7 +61,16 @@ public class SimpleStreamingApp {
                 avroRecord.put("age", 25);
                 avroRecord.put("email", "john@example.com");
                 ProducerRecord<String, GenericRecord> record = new ProducerRecord<>(TOPIC, avroRecord);
-                producer.send(record);
+                producer.send(record, (recordMetadata, exception) -> {
+                    if (exception == null) {
+                        System.out.println("Record written to offset " +
+                                recordMetadata.offset() + " timestamp " +
+                                recordMetadata.timestamp());
+                    } else {
+                        System.err.println("An error occurred");
+                        exception.printStackTrace(System.err);
+                    }
+                });
                 System.out.println("Avro record sent!");
             }
         } catch (Exception e) {
